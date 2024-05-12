@@ -318,41 +318,41 @@
   </div>
 
 <!-- HH08 : จำนวนห้องที่ใช้นอน -->
-  <div class="head">
-  	  <span style="color: #ff0000;"><b>*</b></span>
-      <b>HH08 : จำนวนห้องที่ใช้นอน</b>
-  </div>
-  
-  <div class="frame">
-      <select id="HH08">
-          <option value="">-- ระบุจำนวน --</option>
-      </select>
-  	  <br><br><span class="remark">ตัวเลือกอ้างอิงจาก HH07 (ต้องน้อยกว่าหรือเท่ากับ HH07) เช่น</span>
-      <br><span class="remark">HH07 = 5 → ตัวเลือกของ HH08 : 5, 4, 3, 2, 1</span>
-  </div>
-  
+<div class="head">
+    <span style="color: #ff0000;"><b>*</b></span>
+    <b>HH08 : จำนวนห้องที่ใช้นอน</b>
+</div>
+
+<div class="frame">
+    <select id="HH08">
+        <option value="">-- ระบุจำนวน --</option>
+    </select>
+    <br><br><span class="remark">ตัวเลือกอ้างอิงจาก HH07 (ต้องน้อยกว่าหรือเท่ากับ HH07) เช่น</span>
+    <br><span class="remark">HH07 = 5 → ตัวเลือกของ HH08 : 5, 4, 3, 2, 1</span>
+</div>
+
 <script>
     
-	function updateHH08Options() {
-		var HH07Value = localStorage.getItem('HH07');
+function updateHH08Options() {
+    var HH07Value = localStorage.getItem('HH07');
 
-		if (HH07Value !== null && !isNaN(parseInt(HH07Value))) {
-			var selectElement = document.getElementById('HH08');
-        	selectElement.innerHTML = '';
+    if (HH07Value !== null && !isNaN(parseInt(HH07Value))) {
+        var selectElement = document.getElementById('HH08');
+        selectElement.innerHTML = '';
 
-        	var defaultOption = document.createElement('option');
-        	defaultOption.value = '';
-        	defaultOption.textContent = '-- ระบุจำนวน --';
-        	selectElement.appendChild(defaultOption);
+        var defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '-- ระบุจำนวน --';
+        selectElement.appendChild(defaultOption);
 
-			for (var i = 1; i <= HH07Value; i++) {
-            	var option = document.createElement('option');
-            	option.value = i;
-            	option.textContent = i;
-            	selectElement.appendChild(option);
-        	}
-    	}
-	}
+        for (var i = 1; i <= HH07Value; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            selectElement.appendChild(option);
+        }
+    }
+}
 
 document.getElementById('HH07').addEventListener('change', function() {
     updateHH08Options();
@@ -360,8 +360,9 @@ document.getElementById('HH07').addEventListener('change', function() {
 
 updateHH08Options();
 </script>
-  
+
 </div> <!-- HH07-08Div -->
+
 
 <!--------------------------------------------- HH09 : ไฟฟ้าภายในที่อยู่อาศัย --------------------------------------------->
 
@@ -624,7 +625,7 @@ updateHH08Options();
 
   <div class="head0">
     <b>HH22 - HH41 : ครัวเรือนเป็นเจ้าของสิ่งของต่าง ๆ ต่อไปนี้หรือไม่</b><br>
-</div>
+  </div>
   
   <div class="nn">
     ถ้า <b>&nbsp;&nbsp;เป็นเจ้าของ</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ให้ระบุ <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จำนวน</b><br>
@@ -697,10 +698,10 @@ updateHH08Options();
 
     <script>
 
-        function updateHH08Options() {
-            var HH07Value = localStorage.getItem('HH37');
+        function updateHH38Options() {
+            var HH37Value = localStorage.getItem('HH37');
 
-            if (HH07Value !== null && !isNaN(parseInt(HH07Value))) {
+            if (HH37Value !== null && !isNaN(parseInt(HH37Value))) {
                 var selectElement = document.getElementById('HH38');
                 selectElement.innerHTML = '';
 
@@ -709,7 +710,7 @@ updateHH08Options();
                 defaultOption.textContent = '-- ระบุจำนวน --';
                 selectElement.appendChild(defaultOption);
 
-                for (var i = 1; i <= HH07Value; i++) {
+                for (var i = 0; i <= HH37Value; i++) {
                     var option = document.createElement('option');
                     option.value = i;
                     option.textContent = i;
@@ -719,11 +720,12 @@ updateHH08Options();
         }
 
     document.getElementById('HH37').addEventListener('change', function() {
-        updateHH08Options();
+        updateHH38Options();
     });
 
-    updateHH08Options();
+    updateHH38Options();
     </script>
+  </div>
 
 <div id="HH39Div">
   <div class="head">
