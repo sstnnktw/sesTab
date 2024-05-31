@@ -104,6 +104,10 @@
         text-align: right;
     	background-color: #F7EEFC;
     }
+   #total2 {
+        text-align: center;
+    	background-color: #F7EEFC;
+    }
    #nn {
         padding-left: 30px;
     }
@@ -152,12 +156,15 @@
     }
     input.total {
     	background-color: #EBD5F7;
-        margin-left: 10px;
         display: inline-block;
         pointer-events: none;
     }
     tfoot td {
         font-weight: bold;
+    }
+    input[type="checkbox"] {
+        display: inline-block;
+        vertical-align: middle;
     }
     
     /*--------------------------------*/
@@ -253,10 +260,10 @@
   <thead>
   
   	<tr>
-  		<th rowspan="2" style="min-width: 380px;"><b>รายการค่าใช้จ่าย</b></th>
+  		<th rowspan="2" style="min-width: 285px;"><b>รายการค่าใช้จ่าย</b></th>
   		<th rowspan="2" style="min-width: 110px;"><b>แหล่งที่มา/<br>การได้รับมา</b></th>
-  		<th rowspan="2" style="min-width: 175px;"><b>ปริมาณ/หน่วย</b><br> (เช่น กก./ถุง/<br>กล่อง/ขวด ฯลฯ)</th>
   		<th rowspan="2" style="min-width: 90px;"><b>จำนวนเงิน<br>หรือมูลค่า<br>คิดเป็นเงิน</b></th>
+  		<th rowspan="2" style="min-width: 175px;"><b>ปริมาณ/หน่วย</b><br>(เช่น กก./ถุง/<br>กล่อง/ขวด ฯลฯ)</th>
   		<th colspan="3"><b>อาหารเหล่านี้ใช้บริโภค<br>ได้นานเท่าใด</b></th>
   		<th colspan="2"><b>จำนวนเงิน หรือมูลค่า<br>ที่บริโภค<br>เฉลี่ยต่อสัปดาห์</b></th>
   	</tr>
@@ -277,20 +284,21 @@
 
         <tr>
             <td id="head1"></td>
-            <td id="head1"><span class="remark">EDFxx_xxS</span></td>
-            <td id="head1"><span class="remark" style="font-size: 13px;">EDFxx_xxQ, EDFxx_xxQT</span></td>
-            <td id="head1"><span class="remark">EDFxx_xxC</span></td>
-            <td id="head1"><span class="remark" style="font-size: 12px;">EDFxx_xxPM</span></td>
-            <td id="head1"><span class="remark" style="font-size: 12px;">EDFxx_xxPW</span></td>
-            <td id="head1"><span class="remark" style="font-size: 12px;">EDFxx_xxPD</span></td>
-            <td id="head1"><span class="remark">EDFxx_xxA</span></td>
-            <td id="head1"><span class="remark">EDFxx_xxBC</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx_xxS<br>_(A, BC)</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx_xxC<br>_(A, BC)</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx_xxQ, EDFxx_xxQT</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx<br>_xxPM</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx<br>_xxPW</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx<br>_xxPD</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx_xxA</span></td>
+            <td id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">EDFxx_xxBC</span></td>
         </tr>
 
         <tr>
-            <td colspan="2" id="head1"><b>1. ข้าว แป้ง และอาหารที่ทำจากแป้ง</b></td>
-            <td colspan="5" id="head1" style="text-align: center;"><span class="remark">ล็อค EDFxx_xxQ - EDFxx_xxPD ไว้ ต้องเลือก EDFxx_xxS ก่อนจึงจะใส่ข้อมูลช่องอื่น ๆ ได้</span></td>
-            <td colspan="2" id="head1" style="text-align: center;"><span class="remark">(โปรแกรมคำนวณให้)</span></td>
+            <td id="head1"><b>1. ข้าว แป้ง และอาหารที่ทำจากแป้ง</b></td>
+            <td colspan="2" id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">ติ๊ก EDFxx_xxS_A เพื่อปลดล็อค <br>EDFxx_xxC_A (BC ก็เช่นกัน)</span></td>
+            <td colspan="4" id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">ล็อค EDFxx_xxQ - EDFxx_xxPD ไว้ ต้องเลือก EDFxx_xxS ก่อน<br>จึงจะใส่ข้อมูลช่องอื่น ๆ ได้</span></td>
+            <td colspan="2" id="head1" style="text-align: center"><span class="remark" style="font-size: 13px;">(โปรแกรมคำนวณให้)</span></td>
         </tr>
 
         
@@ -298,7 +306,7 @@
         
             function InsertSub() {
                 var tableBody = document.getElementById('table');
-                var itemCount = 9;
+                var itemCount = 10;
                 var itemNames = [
                     "ขนมอบ/เค้ก และขนมที่ทำจากแป้งเป็นส่วนใหญ่",
                     "ข้าวเจ้า (ข้าวสาร)",
@@ -308,16 +316,19 @@
                     "แป้งสาลี แป้งมันสำปะหลัง และแป้งอื่น ๆ",
                     "เส้นหมี่",
                     "วุ้นเส้น",
-                    "มักกะโรนี สปาเก็ตตี้"
+                    "มักกะโรนี สปาเก็ตตี้",
+                    "สาคูและอื่น ๆ<br><br>ระบุ :<input class='T' id='EDF01_10T' placeholder='EDF01_10T'>"
                 ];
 
                 for (var i = 0; i < itemCount; i++) {
                     var row = document.createElement('tr');
                     
-                    var ValueS = "EDF01_" + (i + 1).toString().padStart(2, '0') + "S";
+                    var ValueSA = "EDF01_" + (i + 1).toString().padStart(2, '0') + "S_A";
+                    var ValueSBC = "EDF01_" + (i + 1).toString().padStart(2, '0') + "S_BC";
+                    var ValueCA = "EDF01_" + (i + 1).toString().padStart(2, '0') + "C_A";
+                    var ValueCBC = "EDF01_" + (i + 1).toString().padStart(2, '0') + "C_BC";
                     var ValueQ = "EDF01_" + (i + 1).toString().padStart(2, '0') + "Q";
                     var ValueQT = "EDF01_" + (i + 1).toString().padStart(2, '0') + "QT";
-                    var ValueC = "EDF01_" + (i + 1).toString().padStart(2, '0') + "C";
                     var ValuePM = "EDF01_" + (i + 1).toString().padStart(2, '0') + "PM";
                     var ValuePW = "EDF01_" + (i + 1).toString().padStart(2, '0') + "PW";
                     var ValuePD = "EDF01_" + (i + 1).toString().padStart(2, '0') + "PD";
@@ -327,65 +338,42 @@
                 <td id="Hsub1">
                 	${itemNames[i]}
                 </td>
+                
                 <td>
-                  <select id="${ValueS}">
-                      <option value="">กรุณาเลือก</option>
-                      <option value="1">ซื้อ/จ่าย</option>
-                      <option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-                  </select><br>
+                    <input type="checkbox" id="${ValueSA}"> ซื้อ/จ่าย
+                    <br>
+                    <input type="checkbox" id="${ValueSBC}"> ไม่ได้ซื้อ/จ่าย
                 </td>
-                <td>
-                	<input type="number"
-                    	   class="Q"
-                           id="${ValueQ}"
-                    >
-                    <input type="text"
-                    	   class="QT"
-                           id="${ValueQT}"
-                           placeholder="ระบุหน่วย"
-                    >
-                    </td>
                     
                 <td>
-                	<input type="number"
-                    	   class="price"
-                           id="${ValueC}"
-                    >
+                	<input type="number" class="price" id="${ValueCA}">
+                    <br>
+                	<input type="number" class="price" id="${ValueCBC}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePM}"
-                    >
+                	<input type="number" class="Q" id="${ValueQ}">
+                    <input type="text" class="QT" id="${ValueQT}" placeholder="ระบุหน่วย">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePW}"
-                    >
+                	<input type="number" class="P" id="${ValuePM}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePD}"
-                    >
+                	<input type="number" class="P" id="${ValuePW}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueA}"
-                    >
+                	<input type="number" class="P" id="${ValuePD}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueB}"
-                    >
+                	<input type="number" class="gray" id="${ValueA}" placeholder="${ValueA}">
+                </td>
+                
+                <td>
+                	<input type="number" class="gray" id="${ValueB}" placeholder="${ValueB}">
                 </td>
                     `;
                     tableBody.appendChild(row);
@@ -402,85 +390,19 @@
             });
             
         </script>
-    
-    	<tr>
-            <td id="Hsub1">สาคูและอื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF01_10T" placeholder="EDF01_10T">
-            </td>
-            <td>
-            	<select id="EDF01_10S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF01_10Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF01_10QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF01_10C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF01_10PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF01_10PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF01_10PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF01_10A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF01_10BC"
-                >
-            </td>
-        </tr>
         
 <!-------------------------------------------------------->
         
     	<tr>
             <td id="total" colspan="7"><span class="remarkR">(โปรแกรมคำนวณให้)</span><b>รวม</b></td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF01A"
                        placeholder="EDF01A"
                 >
 			</td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF01BC"
@@ -500,86 +422,68 @@
         
             function InsertSub() {
                 var tableBody = document.getElementById('table');
-                var itemCount = 3;
+                var itemCount = 4;
                 var itemNames = [
                     "หมู/เนื้อเค็มหรือตากแห้ง",
                     "หมูหยอง/ไก่หยอง",
-                    "กุนเชียงหมู"
+                    "กุนเชียงหมู",
+                    "เนื้อกระป๋อง/เนื้อสัตว์ (แปรรูป)อื่น ๆ<br><br>ระบุ :<input class='T' id='EDF02_04T' placeholder='EDF02_04T'>"
                 ];
 
                 for (var i = 0; i < itemCount; i++) {
                     var row = document.createElement('tr');
                     
-                    var ValueS = "EDF02_" + (i + 1).toString().padStart(2, '0') + "S";
+                    var ValueSA = "EDF02_" + (i + 1).toString().padStart(2, '0') + "S_A";
+                    var ValueSBC = "EDF02_" + (i + 1).toString().padStart(2, '0') + "S_BC";
+                    var ValueCA = "EDF02_" + (i + 1).toString().padStart(2, '0') + "C_A";
+                    var ValueCBC = "EDF02_" + (i + 1).toString().padStart(2, '0') + "C_BC";
                     var ValueQ = "EDF02_" + (i + 1).toString().padStart(2, '0') + "Q";
                     var ValueQT = "EDF02_" + (i + 1).toString().padStart(2, '0') + "QT";
-                    var ValueC = "EDF02_" + (i + 1).toString().padStart(2, '0') + "C";
                     var ValuePM = "EDF02_" + (i + 1).toString().padStart(2, '0') + "PM";
                     var ValuePW = "EDF02_" + (i + 1).toString().padStart(2, '0') + "PW";
                     var ValuePD = "EDF02_" + (i + 1).toString().padStart(2, '0') + "PD";
                     var ValueA = "EDF02_" + (i + 1).toString().padStart(2, '0') + "A";
                     var ValueB = "EDF02_" + (i + 1).toString().padStart(2, '0') + "BC";
                     row.innerHTML = `
-                <td id="Hsub1">${itemNames[i]}</td>
-                <td>
-                  <select id="${ValueS}">
-                      <option value="">กรุณาเลือก</option>
-                      <option value="1">ซื้อ/จ่าย</option>
-                      <option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-                  </select>
+                <td id="Hsub1">
+                	${itemNames[i]}
                 </td>
+                
                 <td>
-                	<input type="number"
-                    	   class="Q"
-                           id="${ValueQ}"
-                    >
-                    <input type="text"
-                    	   class="QT"
-                           id="${ValueQT}"
-                           placeholder="ระบุหน่วย"
-                    >
-                    </td>
+                    <input type="checkbox" id="${ValueSA}"> ซื้อ/จ่าย
+                    <br>
+                    <input type="checkbox" id="${ValueSBC}"> ไม่ได้ซื้อ/จ่าย
+                </td>
                     
                 <td>
-                	<input type="number"
-                    	   class="price"
-                           id="${ValueC}"
-                    >
+                	<input type="number" class="price" id="${ValueCA}">
+                    <br>
+                	<input type="number" class="price" id="${ValueCBC}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePM}"
-                    >
+                	<input type="number" class="Q" id="${ValueQ}">
+                    <input type="text" class="QT" id="${ValueQT}" placeholder="ระบุหน่วย">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePW}"
-                    >
+                	<input type="number" class="P" id="${ValuePM}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePD}"
-                    >
+                	<input type="number" class="P" id="${ValuePW}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueA}"
-                    >
+                	<input type="number" class="P" id="${ValuePD}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueB}"
-                    >
+                	<input type="number" class="gray" id="${ValueA}" placeholder="${ValueA}">
+                </td>
+                
+                <td>
+                	<input type="number" class="gray" id="${ValueB}" placeholder="${ValueB}">
                 </td>
                     `;
                     tableBody.appendChild(row);
@@ -596,85 +500,19 @@
             });
             
         </script>
-    
-    	<tr>
-            <td id="Hsub1">เนื้อกระป๋อง/เนื้อสัตว์ (แปรรูป) อื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF02_04T" placeholder="EDF02_04T">
-            </td>
-            <td>
-            	<select id="EDF02_04S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF02_04Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF02_04QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF02_04C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF02_04PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF02_04PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF02_04PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF02_04A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF02_04BC"
-                >
-            </td>
-        </tr>
         
 <!-------------------------------------------------------->
         
     	<tr>
             <td id="total" colspan="7"><span class="remarkR">(โปรแกรมคำนวณให้)</span><b>รวม</b></td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF02A"
                        placeholder="EDF02A"
                 >
 			</td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF02BC"
@@ -688,157 +526,74 @@
         <tr>
             <td colspan="9" id="head1"><b>3. ปลาและสัตว์น้ำอื่น ๆ</b></td>
         </tr>
-    
-    	<tr>
-            <td id="Hsub1">ปลาแห้ง ปลาเค็ม <br><br>ระบุประเภทปลา :
-            	<input class="T" id="EDF03_01T" placeholder="EDF03_01T">
-            </td>
-            <td>
-            	<select id="EDF03_01S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF03_01Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF03_01QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF03_01C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF03_01PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF03_01PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF03_01PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF03_01A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF03_01BC"
-                >
-            </td>
-        </tr>
         
         <script>
         
             function InsertSub() {
                 var tableBody = document.getElementById('table');
-                var itemCount = 3;
+                var itemCount = 5;
                 var itemNames = [
+                    "ปลาแห้ง ปลาเค็ม<br><br>ระบุระเภทปลา :<input class='T' id='EDF03_01T' placeholder='EDF03_01T'>",
                     "กุ้งแห้ง",
                     "ปูเค็ม",
-                    "ปลาร้า"
+                    "ปลาร้า",
+                    "ปูดอง และสัตว์น้ำ (แปรรูป) อื่น ๆ<br><br>ระบุ :<input class='T' id='EDF03_05T' placeholder='EDF03_05T'>"
                 ];
 
                 for (var i = 0; i < itemCount; i++) {
                     var row = document.createElement('tr');
                     
-                    var ValueS = "EDF03_" + (i + 2).toString().padStart(2, '0') + "S";
-                    var ValueQ = "EDF03_" + (i + 2).toString().padStart(2, '0') + "Q";
-                    var ValueQT = "EDF03_" + (i + 2).toString().padStart(2, '0') + "QT";
-                    var ValueC = "EDF03_" + (i + 2).toString().padStart(2, '0') + "C";
-                    var ValuePM = "EDF03_" + (i + 2).toString().padStart(2, '0') + "PM";
-                    var ValuePW = "EDF03_" + (i + 2).toString().padStart(2, '0') + "PW";
-                    var ValuePD = "EDF03_" + (i + 2).toString().padStart(2, '0') + "PD";
-                    var ValueA = "EDF03_" + (i + 2).toString().padStart(2, '0') + "A";
-                    var ValueB = "EDF03_" + (i + 2).toString().padStart(2, '0') + "BC";
+                    var ValueSA = "EDF03_" + (i + 1).toString().padStart(2, '0') + "S_A";
+                    var ValueSBC = "EDF03_" + (i + 1).toString().padStart(2, '0') + "S_BC";
+                    var ValueCA = "EDF03_" + (i + 1).toString().padStart(2, '0') + "C_A";
+                    var ValueCBC = "EDF03_" + (i + 1).toString().padStart(2, '0') + "C_BC";
+                    var ValueQ = "EDF03_" + (i + 1).toString().padStart(2, '0') + "Q";
+                    var ValueQT = "EDF03_" + (i + 1).toString().padStart(2, '0') + "QT";
+                    var ValuePM = "EDF03_" + (i + 1).toString().padStart(2, '0') + "PM";
+                    var ValuePW = "EDF03_" + (i + 1).toString().padStart(2, '0') + "PW";
+                    var ValuePD = "EDF03_" + (i + 1).toString().padStart(2, '0') + "PD";
+                    var ValueA = "EDF03_" + (i + 1).toString().padStart(2, '0') + "A";
+                    var ValueB = "EDF03_" + (i + 1).toString().padStart(2, '0') + "BC";
                     row.innerHTML = `
-                <td id="Hsub1">${itemNames[i]}</td>
-                <td>
-                  <select id="${ValueS}">
-                      <option value="">กรุณาเลือก</option>
-                      <option value="1">ซื้อ/จ่าย</option>
-                      <option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-                  </select>
+                <td id="Hsub1">
+                	${itemNames[i]}
                 </td>
+                
                 <td>
-                	<input type="number"
-                    	   class="Q"
-                           id="${ValueQ}"
-                    >
-                    <input type="text"
-                    	   class="QT"
-                           id="${ValueQT}"
-                           placeholder="ระบุหน่วย"
-                    >
-                    </td>
+                    <input type="checkbox" id="${ValueSA}"> ซื้อ/จ่าย
+                    <br>
+                    <input type="checkbox" id="${ValueSBC}"> ไม่ได้ซื้อ/จ่าย
+                </td>
                     
                 <td>
-                	<input type="number"
-                    	   class="price"
-                           id="${ValueC}"
-                    >
+                	<input type="number" class="price" id="${ValueCA}">
+                    <br>
+                	<input type="number" class="price" id="${ValueCBC}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePM}"
-                    >
+                	<input type="number" class="Q" id="${ValueQ}">
+                    <input type="text" class="QT" id="${ValueQT}" placeholder="ระบุหน่วย">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePW}"
-                    >
+                	<input type="number" class="P" id="${ValuePM}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePD}"
-                    >
+                	<input type="number" class="P" id="${ValuePW}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueA}"
-                    >
+                	<input type="number" class="P" id="${ValuePD}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueB}"          
-                    >
+                	<input type="number" class="gray" id="${ValueA}" placeholder="${ValueA}">
+                </td>
+                
+                <td>
+                	<input type="number" class="gray" id="${ValueB}" placeholder="${ValueB}">
                 </td>
                     `;
                     tableBody.appendChild(row);
@@ -855,85 +610,19 @@
             });
             
         </script>
-    
-    	<tr>
-            <td id="Hsub1">ปูดอง และสัตว์น้ำ (แปรรูป) อื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF03_05T" placeholder="EDF03_05T">
-            </td>
-            <td>
-            	<select id="EDF03_05S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF03_05Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF03_05QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF03_05C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF03_05PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF03_05PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF03_05PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF03_05A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF03_05BC"
-                >
-            </td>
-        </tr>
         
 <!-------------------------------------------------------->
         
     	<tr>
             <td id="total" colspan="7"><span class="remarkR">(โปรแกรมคำนวณให้)</span><b>รวม</b></td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF03A"
                        placeholder="EDF03A"
                 >
 			</td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF03BC"
@@ -952,7 +641,7 @@
         
             function InsertSub() {
                 var tableBody = document.getElementById('table');
-                var itemCount = 7;
+                var itemCount = 8;
                 var itemNames = [
                     "นมยูเอชที",
                     "นมโรงเรียนทุกประเภท (ได้รับอุดหนุนฟรีจากรัฐ)",
@@ -960,82 +649,64 @@
                     "นมข้นหวาน",
                     "นมผง",
                     "ครีมเทียม",
-                    "เนยเทียม"
+                    "เนยเทียม",
+                    "ไข่เค็ม และอื่น ๆ<br><br>ระบุ :<input class='T' id='EDF04_08T' placeholder='EDF04_08T'>"
                 ];
 
                 for (var i = 0; i < itemCount; i++) {
                     var row = document.createElement('tr');
                     
-                    var ValueS = "EDF04_" + (i + 1).toString().padStart(2, '0') + "S";
+                    var ValueSA = "EDF04_" + (i + 1).toString().padStart(2, '0') + "S_A";
+                    var ValueSBC = "EDF04_" + (i + 1).toString().padStart(2, '0') + "S_BC";
+                    var ValueCA = "EDF04_" + (i + 1).toString().padStart(2, '0') + "C_A";
+                    var ValueCBC = "EDF04_" + (i + 1).toString().padStart(2, '0') + "C_BC";
                     var ValueQ = "EDF04_" + (i + 1).toString().padStart(2, '0') + "Q";
                     var ValueQT = "EDF04_" + (i + 1).toString().padStart(2, '0') + "QT";
-                    var ValueC = "EDF04_" + (i + 1).toString().padStart(2, '0') + "C";
                     var ValuePM = "EDF04_" + (i + 1).toString().padStart(2, '0') + "PM";
                     var ValuePW = "EDF04_" + (i + 1).toString().padStart(2, '0') + "PW";
                     var ValuePD = "EDF04_" + (i + 1).toString().padStart(2, '0') + "PD";
                     var ValueA = "EDF04_" + (i + 1).toString().padStart(2, '0') + "A";
                     var ValueB = "EDF04_" + (i + 1).toString().padStart(2, '0') + "BC";
                     row.innerHTML = `
-                <td id="Hsub1">${itemNames[i]}</td>
-                <td>
-                  <select id="${ValueS}">
-                      <option value="">กรุณาเลือก</option>
-                      <option value="1">ซื้อ/จ่าย</option>
-                      <option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-                  </select>
+                <td id="Hsub1">
+                	${itemNames[i]}
                 </td>
+                
                 <td>
-                	<input type="number"
-                    	   class="Q"
-                           id="${ValueQ}"
-                    >
-                    <input type="text"
-                    	   class="QT"
-                           id="${ValueQT}"
-                           placeholder="ระบุหน่วย"
-                    >
-                    </td>
+                    <input type="checkbox" id="${ValueSA}"> ซื้อ/จ่าย
+                    <br>
+                    <input type="checkbox" id="${ValueSBC}"> ไม่ได้ซื้อ/จ่าย
+                </td>
                     
                 <td>
-                	<input type="number"
-                    	   class="price"
-                           id="${ValueC}"
-                    >
+                	<input type="number" class="price" id="${ValueCA}">
+                    <br>
+                	<input type="number" class="price" id="${ValueCBC}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePM}"
-                    >
+                	<input type="number" class="Q" id="${ValueQ}">
+                    <input type="text" class="QT" id="${ValueQT}" placeholder="ระบุหน่วย">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePW}"
-                    >
+                	<input type="number" class="P" id="${ValuePM}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePD}"
-                    >
+                	<input type="number" class="P" id="${ValuePW}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueA}"
-                    >
+                	<input type="number" class="P" id="${ValuePD}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueB}"          
-                    >
+                	<input type="number" class="gray" id="${ValueA}" placeholder="${ValueA}">
+                </td>
+                
+                <td>
+                	<input type="number" class="gray" id="${ValueB}" placeholder="${ValueB}">
                 </td>
                     `;
                     tableBody.appendChild(row);
@@ -1052,85 +723,19 @@
             });
             
         </script>
-    
-    	<tr>
-            <td id="Hsub1">ไข่เค็ม และอื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF04_08T" placeholder="EDF04_08T">
-            </td>
-            <td>
-            	<select id="EDF04_08S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF04_08Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF04_08QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF04_08C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF04_08PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF04_08PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF04_08PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF04_08A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF04_08BC"
-                >
-            </td>
-        </tr>
         
 <!-------------------------------------------------------->
         
     	<tr>
             <td id="total" colspan="7"><span class="remarkR">(โปรแกรมคำนวณให้)</span><b>รวม</b></td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF04A"
                        placeholder="EDF04A"
                 >
 			</td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF04BC"
@@ -1149,87 +754,69 @@
         
             function InsertSub() {
                 var tableBody = document.getElementById('table');
-                var itemCount = 4;
+                var itemCount = 5;
                 var itemNames = [
                     "น้ำมันพืช",
                     "น้ำมันสัตว์/น้ำมันหมู",
                     "เนยสด น้ำมันเนย",
-                    "กะทิกระป๋อง/สำเร็จรูป"
+                    "กะทิกระป๋อง/สำเร็จรูป",
+                    "ไขมัน และน้ำมันอื่น ๆ<br><br>ระบุ :<input class='T' id='EDF05_05T' placeholder='EDF05_05T'>"
                 ];
 
                 for (var i = 0; i < itemCount; i++) {
                     var row = document.createElement('tr');
                     
-                    var ValueS = "EDF05_" + (i + 1).toString().padStart(2, '0') + "S";
+                    var ValueSA = "EDF05_" + (i + 1).toString().padStart(2, '0') + "S_A";
+                    var ValueSBC = "EDF05_" + (i + 1).toString().padStart(2, '0') + "S_BC";
+                    var ValueCA = "EDF05_" + (i + 1).toString().padStart(2, '0') + "C_A";
+                    var ValueCBC = "EDF05_" + (i + 1).toString().padStart(2, '0') + "C_BC";
                     var ValueQ = "EDF05_" + (i + 1).toString().padStart(2, '0') + "Q";
                     var ValueQT = "EDF05_" + (i + 1).toString().padStart(2, '0') + "QT";
-                    var ValueC = "EDF05_" + (i + 1).toString().padStart(2, '0') + "C";
                     var ValuePM = "EDF05_" + (i + 1).toString().padStart(2, '0') + "PM";
                     var ValuePW = "EDF05_" + (i + 1).toString().padStart(2, '0') + "PW";
                     var ValuePD = "EDF05_" + (i + 1).toString().padStart(2, '0') + "PD";
                     var ValueA = "EDF05_" + (i + 1).toString().padStart(2, '0') + "A";
                     var ValueB = "EDF05_" + (i + 1).toString().padStart(2, '0') + "BC";
                     row.innerHTML = `
-                <td id="Hsub1">${itemNames[i]}</td>
-                <td>
-                  <select id="${ValueS}">
-                      <option value="">กรุณาเลือก</option>
-                      <option value="1">ซื้อ/จ่าย</option>
-                      <option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-                  </select>
+                <td id="Hsub1">
+                	${itemNames[i]}
                 </td>
+                
                 <td>
-                	<input type="number"
-                    	   class="Q"
-                           id="${ValueQ}"
-                    >
-                    <input type="text"
-                    	   class="QT"
-                           id="${ValueQT}"
-                           placeholder="ระบุหน่วย"
-                    >
-                    </td>
+                    <input type="checkbox" id="${ValueSA}"> ซื้อ/จ่าย
+                    <br>
+                    <input type="checkbox" id="${ValueSBC}"> ไม่ได้ซื้อ/จ่าย
+                </td>
                     
                 <td>
-                	<input type="number"
-                    	   class="price"
-                           id="${ValueC}"
-                    >
+                	<input type="number" class="price" id="${ValueCA}">
+                    <br>
+                	<input type="number" class="price" id="${ValueCBC}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePM}"
-                    >
+                	<input type="number" class="Q" id="${ValueQ}">
+                    <input type="text" class="QT" id="${ValueQT}" placeholder="ระบุหน่วย">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePW}"
-                    >
+                	<input type="number" class="P" id="${ValuePM}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePD}"
-                    >
+                	<input type="number" class="P" id="${ValuePW}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueA}"
-                    >
+                	<input type="number" class="P" id="${ValuePD}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueB}"          
-                    >
+                	<input type="number" class="gray" id="${ValueA}" placeholder="${ValueA}">
+                </td>
+                
+                <td>
+                	<input type="number" class="gray" id="${ValueB}" placeholder="${ValueB}">
                 </td>
                     `;
                     tableBody.appendChild(row);
@@ -1246,85 +833,19 @@
             });
             
         </script>
-    
-    	<tr>
-            <td id="Hsub1">ไขมัน และน้ำมันอื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF05_05T" placeholder="EDF05_05T">
-            </td>
-            <td>
-            	<select id="EDF05_05S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF05_05Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF05_05QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF05_05C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF05_05PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF05_05PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF05_05PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF05_05A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF05_05BC"
-                >
-            </td>
-        </tr>
         
 <!-------------------------------------------------------->
         
     	<tr>
             <td id="total" colspan="7"><span class="remarkR">(โปรแกรมคำนวณให้)</span><b>รวม</b></td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF05A"
                        placeholder="EDF05A"
                 >
 			</td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF05BC"
@@ -1343,86 +864,69 @@
         
             function InsertSub() {
                 var tableBody = document.getElementById('table');
-                var itemCount = 3;
+                var itemCount = 5;
                 var itemNames = [
                     "ผลไม้แช่อิ่ม/ดอง/กวน/ตากแห้ง",
                     "ผลไม้กระป๋อง",
-                    "ถั่วลิสง"
+                    "ถั่วลิสง",
+                    "ผลไม้แปรรูปอื่น ๆ<br><br>ระบุ :<input class='T' id='EDF06_04T' placeholder='EDF06_05T'>",
+                    "ถั่วเหลืองและถั่วอื่น ๆ<br><br>ระบุ :<input class='T' id='EDF06_04T' placeholder='EDF06_05T'>"
                 ];
 
                 for (var i = 0; i < itemCount; i++) {
                     var row = document.createElement('tr');
                     
-                    var ValueS = "EDF06_" + (i + 1).toString().padStart(2, '0') + "S";
+                    var ValueSA = "EDF06_" + (i + 1).toString().padStart(2, '0') + "S_A";
+                    var ValueSBC = "EDF06_" + (i + 1).toString().padStart(2, '0') + "S_BC";
+                    var ValueCA = "EDF06_" + (i + 1).toString().padStart(2, '0') + "C_A";
+                    var ValueCBC = "EDF06_" + (i + 1).toString().padStart(2, '0') + "C_BC";
                     var ValueQ = "EDF06_" + (i + 1).toString().padStart(2, '0') + "Q";
                     var ValueQT = "EDF06_" + (i + 1).toString().padStart(2, '0') + "QT";
-                    var ValueC = "EDF06_" + (i + 1).toString().padStart(2, '0') + "C";
                     var ValuePM = "EDF06_" + (i + 1).toString().padStart(2, '0') + "PM";
                     var ValuePW = "EDF06_" + (i + 1).toString().padStart(2, '0') + "PW";
                     var ValuePD = "EDF06_" + (i + 1).toString().padStart(2, '0') + "PD";
                     var ValueA = "EDF06_" + (i + 1).toString().padStart(2, '0') + "A";
                     var ValueB = "EDF06_" + (i + 1).toString().padStart(2, '0') + "BC";
                     row.innerHTML = `
-                <td id="Hsub1">${itemNames[i]}</td>
-                <td>
-                  <select id="${ValueS}">
-                      <option value="">กรุณาเลือก</option>
-                      <option value="1">ซื้อ/จ่าย</option>
-                      <option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-                  </select>
+                <td id="Hsub1">
+                	${itemNames[i]}
                 </td>
+                
                 <td>
-                	<input type="number"
-                    	   class="Q"
-                           id="${ValueQ}"
-                    >
-                    <input type="text"
-                    	   class="QT"
-                           id="${ValueQT}"
-                           placeholder="ระบุหน่วย"
-                    >
-                    </td>
+                    <input type="checkbox" id="${ValueSA}"> ซื้อ/จ่าย
+                    <br>
+                    <input type="checkbox" id="${ValueSBC}"> ไม่ได้ซื้อ/จ่าย
+                </td>
                     
                 <td>
-                	<input type="number"
-                    	   class="price"
-                           id="${ValueC}"
-                    >
+                	<input type="number" class="price" id="${ValueCA}">
+                    <br>
+                	<input type="number" class="price" id="${ValueCBC}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePM}"
-                    >
+                	<input type="number" class="Q" id="${ValueQ}">
+                    <input type="text" class="QT" id="${ValueQT}" placeholder="ระบุหน่วย">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePW}"
-                    >
+                	<input type="number" class="P" id="${ValuePM}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="P"
-                           id="${ValuePD}"
-                    >
+                	<input type="number" class="P" id="${ValuePW}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueA}"
-                    >
+                	<input type="number" class="P" id="${ValuePD}">
                 </td>
                 
                 <td>
-                	<input type="number"
-                    	   class="gray"
-                           id="${ValueB}"          
-                    >
+                	<input type="number" class="gray" id="${ValueA}" placeholder="${ValueA}">
+                </td>
+                
+                <td>
+                	<input type="number" class="gray" id="${ValueB}" placeholder="${ValueB}">
                 </td>
                     `;
                     tableBody.appendChild(row);
@@ -1439,151 +943,19 @@
             });
             
         </script>
-    
-    	<tr>
-            <td id="Hsub1">ผลไม้แปรรูปอื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF06_04T" placeholder="EDF06_04T">
-            </td>
-            <td>
-            	<select id="EDF06_04S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF06_04Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF06_04QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF06_04C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF06_04PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF06_04PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF06_04PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF06_04A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF06_04BC"
-                >
-            </td>
-        </tr>
-    
-    	<tr>
-            <td id="Hsub1">ถั่วเหลืองและถั่วอื่น ๆ<br><br>ระบุ :
-            	<input class="T" id="EDF06_05T" placeholder="EDF06_05T">
-            </td>
-            <td>
-            	<select id="EDF06_05S">
-            		<option value="">กรุณาเลือก</option>
-            		<option value="1">ซื้อ/จ่าย</option>
-            		<option value="2">ไม่ได้ซื้อ/จ่าย เบิกได้ หรือผลิตเอง</option>
-            	</select>
-            </td>
-            <td>
-            	<input type="number" 
-                	   class="Q"
-                       id="EDF06_05Q"
-                >
-                <input type="text"
-                	   class="QT"
-                       id="EDF06_05QT"
-                       placeholder="ระบุหน่วย"
-                >
-            </td>
-                    
-            <td>
-            	<input type="number"
-                	   class="price"
-                       id="EDF06_05C"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF06_05PM"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF06_05PW"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="P"
-                       id="EDF06_05PD"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF06_05A"
-                >
-            </td>
-            
-            <td>
-            	<input type="number"
-                	   class="gray"
-                       id="EDF06_05BC"
-                >
-            </td>
-        </tr>
         
 <!-------------------------------------------------------->
         
     	<tr>
             <td id="total" colspan="7"><span class="remarkR">(โปรแกรมคำนวณให้)</span><b>รวม</b></td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF06A"
                        placeholder="EDF06A"
                 >
 			</td>
-            <td id="total">
+            <td id="total2">
             	<input class="total"
                 	   type="number"
                        id="EDF06BC"
@@ -1646,7 +1018,12 @@ function next() {
 
 function saveToLocalStorage() {
     inputIds.forEach(function(id) {
-        localStorage.setItem(id, document.getElementById(id).value);
+        var element = document.getElementById(id);
+        if (element.type === 'checkbox') {
+            localStorage.setItem(id, element.checked ? 1 : 0);
+        } else {
+            localStorage.setItem(id, element.value);
+        }
     });
 }
 
@@ -1663,17 +1040,30 @@ function resetLocalStorage() {
 
 window.onload = function() {
     inputIds.forEach(function(id) {
-        var inputField = document.getElementById(id);
-        inputField.addEventListener('input', function() {
-        	saveToLocalStorage();
-            calculateValues();
-        });
+        var element = document.getElementById(id);
 
-        var value = localStorage.getItem(id);
-        if (value !== null) {
-            inputField.value = value;
+        // สำหรับ input elements
+        if (element.type === 'checkbox') {
+        	element.addEventListener('change', function() {
+        		saveToLocalStorage();
+        	});
+        	var value = localStorage.getItem(id);
+        	if (value !== null) {
+        		element.checked = value == 1;
+        	} else {
+        		element.checked = false;
+        	}
         } else {
-            inputField.value = "";
+        	element.addEventListener('input', function() {
+        		saveToLocalStorage();
+        		calculateValues();
+        	});
+        	var value = localStorage.getItem(id);
+        	if (value !== null) {
+        		element.value = value;
+        	} else {
+        		element.value = "";
+        	}
         }
     });
     saveToLocalStorage();
@@ -1683,117 +1073,80 @@ window.onload = function() {
 <!--------------------------------------------------------------------->
 
 function calculateValues() {
-    for (var i = 1; i <= 6; i++) {
-        var jLimit = 10;
-        if (i === 2) jLimit = 4;
-        else if (i === 3) jLimit = 5;
-        else if (i === 4) jLimit = 8;
-        else if (i === 5) jLimit = 5;
-        else if (i === 6) jLimit = 5;
-        
-        var TotalA = 0;
-        var TotalB = 0;
+    const jLimits = { 1: 10, 2: 4, 3: 5, 4: 8, 5: 5, 6: 5};
 
-        for (var j = 1; j <= jLimit; j++) {
-            var S = parseInt(document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "S").value) || 0;
-            var C = parseInt(document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "C").value) || 0;
-            var PM = parseInt(document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PM").value) || 0;
-            var PW = parseInt(document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PW").value) || 0;
-            var PD = parseInt(document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PD").value) || 0;
-            var A = document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "A");
-            var B = document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "BC");
+    for (let i = 1; i <= 6; i++) {
+        const jLimit = jLimits[i];
+        let TotalA = 0;
+        let TotalB = 0;
 
-            if (S === 1) {
-                var A_result = C / ((PM * 4.3) + PW + (PD / 7));
+        for (let j = 1; j <= jLimit; j++) {
+            const iStr = i.toString().padStart(2, '0');
+            const jStr = j.toString().padStart(2, '0');
+            const SA = document.getElementById(`EDF${iStr}_${jStr}S_A`).checked ? 1 : 0;
+            const SBC = document.getElementById(`EDF${iStr}_${jStr}S_BC`).checked ? 1 : 0;
+            const CA = parseInt(document.getElementById(`EDF${iStr}_${jStr}C_A`).value) || 0;
+            const CBC = parseInt(document.getElementById(`EDF${iStr}_${jStr}C_BC`).value) || 0;
+            const PM = parseInt(document.getElementById(`EDF${iStr}_${jStr}PM`).value) || 0;
+            const PW = parseInt(document.getElementById(`EDF${iStr}_${jStr}PW`).value) || 0;
+            const PD = parseInt(document.getElementById(`EDF${iStr}_${jStr}PD`).value) || 0;
+            const A = document.getElementById(`EDF${iStr}_${jStr}A`);
+            const B = document.getElementById(`EDF${iStr}_${jStr}BC`);
+
+            setPointerEventsAndBackground(`EDF${iStr}_${jStr}C_A`, SA ? "auto" : "none", SA ? "#fff" : "#EEEEEE");
+            if (!SA) document.getElementById(`EDF${iStr}_${jStr}C_A`).value = "";
+
+            setPointerEventsAndBackground(`EDF${iStr}_${jStr}C_BC`, SBC ? "auto" : "none", SBC ? "#fff" : "#EEEEEE");
+            if (!SBC) document.getElementById(`EDF${iStr}_${jStr}C_BC`).value = "";
+
+            if (SA || SBC) {
+                const base = (PM * 4.3) + PW + (PD / 7);
+                const A_result = CA / base;
+                const B_result = CBC / base;
+
                 if (!isNaN(A_result)) {
                     A.value = Math.round(A_result);
                     TotalA += A_result;
-                    calculateTotal(i, TotalA, TotalB);
-                } else {
-                    A.value = '';
                 }
-                B.value = 0;
-                
-                // กำหนด pointerEvents ของ element ที่เกี่ยวข้อง
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "Q").style.pointerEvents = "auto";
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "QT").style.pointerEvents = "auto";            
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "C").style.pointerEvents = "auto";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PM").style.pointerEvents = "auto";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PW").style.pointerEvents = "auto";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PD").style.pointerEvents = "auto";
-                
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}Q`).style.backgroundColor = "#fff";
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}QT`).style.backgroundColor = "#fff";            
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}C`).style.backgroundColor = "#fff";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PM`).style.backgroundColor = "#fff";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PW`).style.backgroundColor = "#fff";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PD`).style.backgroundColor = "#fff";
-                
-            } else if (S === 2) {
-                var B_result = C / ((PM * 4.3) + PW + (PD / 7));
                 if (!isNaN(B_result)) {
                     B.value = Math.round(B_result);
                     TotalB += B_result;
-                    calculateTotal(i, TotalA, TotalB);
-                } else {
-                    B.value = '';
                 }
-                A.value = 0;
-                
-                // กำหนด pointerEvents ของ element ที่เกี่ยวข้อง
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "Q").style.pointerEvents = "auto";
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "QT").style.pointerEvents = "auto";            
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "C").style.pointerEvents = "auto";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PM").style.pointerEvents = "auto";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PW").style.pointerEvents = "auto";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PD").style.pointerEvents = "auto";
-                
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}Q`).style.backgroundColor = "#fff";
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}QT`).style.backgroundColor = "#fff";            
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}C`).style.backgroundColor = "#fff";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PM`).style.backgroundColor = "#fff";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PW`).style.backgroundColor = "#fff";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PD`).style.backgroundColor = "#fff";
+                setRelatedElementsState(iStr, jStr, "auto", "#fff");
             } else {
-                A.value = '';
-                B.value = '';
-                calculateTotal(i, TotalA, TotalB);
-                
-                // กำหนด pointerEvents ของ element ที่เกี่ยวข้อง
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "Q").style.pointerEvents = "none";
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "QT").style.pointerEvents = "none";            
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "C").style.pointerEvents = "none";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PM").style.pointerEvents = "none";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PW").style.pointerEvents = "none";          
-                document.getElementById("EDF" + i.toString().padStart(2, '0') + "_" + j.toString().padStart(2, '0') + "PD").style.pointerEvents = "none";
-                
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}Q`).style.backgroundColor = "#EEEEEE";
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}QT`).style.backgroundColor = "#EEEEEE";            
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}C`).style.backgroundColor = "#EEEEEE";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PM`).style.backgroundColor = "#EEEEEE";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PW`).style.backgroundColor = "#EEEEEE";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PD`).style.backgroundColor = "#EEEEEE";
-                
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}Q`).value = "";
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}QT`).value = "";          
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}C`).value = "";         
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PM`).value = "";         
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PW`).value = "";         
-                document.getElementById(`EDF${i.toString().padStart(2, '0')}_${j.toString().padStart(2, '0')}PD`).value = "";
+                clearAndDisableElements(iStr, jStr, A, B);
             }
+            calculateTotal(i, TotalA, TotalB);
         }
-        
-        
     }
 }
 
+function setPointerEventsAndBackground(elementId, pointerEvents, backgroundColor) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.style.pointerEvents = pointerEvents;
+        element.style.backgroundColor = backgroundColor;
+    }
+}
+
+function setRelatedElementsState(iStr, jStr, pointerEvents, backgroundColor) {
+    const elements = ['Q', 'QT', 'PM', 'PW', 'PD'];
+    elements.forEach(el => setPointerEventsAndBackground(`EDF${iStr}_${jStr}${el}`, pointerEvents, backgroundColor));
+}
+
+function clearAndDisableElements(iStr, jStr, A, B) {
+    A.value = '';
+    B.value = '';
+    setRelatedElementsState(iStr, jStr, "none", "#EEEEEE");
+    ['Q', 'QT', 'PM', 'PW', 'PD'].forEach(el => document.getElementById(`EDF${iStr}_${jStr}${el}`).value = "");
+}
+
 function calculateTotal(i, TotalA, TotalB) {
-    var EDFiA = document.getElementById("EDF" + i.toString().padStart(2, '0') + "A");
-    var EDFiBC = document.getElementById("EDF" + i.toString().padStart(2, '0') + "BC");
+    const EDFiA = document.getElementById(`EDF${i.toString().padStart(2, '0')}A`);
+    const EDFiBC = document.getElementById(`EDF${i.toString().padStart(2, '0')}BC`);
     EDFiA.value = TotalA === 0 ? '' : Math.round(TotalA);
     EDFiBC.value = TotalB === 0 ? '' : Math.round(TotalB);
 }
-
 
 </script>
 
