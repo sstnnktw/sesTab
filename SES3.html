@@ -653,15 +653,20 @@ function setLocalStorageValues() {
     var HM_IN2 = localStorage.getItem("HM_IN2");
     
     
-    var HM_IN08_1D = localStorage.getItem("HM_IN08_1");
-    var HM_IN08_2D = localStorage.getItem("HM_IN08_2");
-    var HM_IN08_3D = localStorage.getItem("HM_IN08_3");
-    var HM_IN08_4D = localStorage.getItem("HM_IN08_4");
-    var HM_IN08_5D = localStorage.getItem("HM_IN08_5");
-    var HM_IN08_6D = localStorage.getItem("HM_IN08_6");
-    var HM_IN09D = localStorage.getItem("HM_IN09");
-    var HM_IN15D = localStorage.getItem("HM_IN15");
-    
+    function getLocalStorageItemAndMultiply(key) {
+        var value = localStorage.getItem(key);
+        var multipliedValue = value * 12;
+        return multipliedValue === 0 ? '' : multipliedValue;
+    }
+
+    var HM_IN08_1D = getLocalStorageItemAndMultiply("HM_IN08_1");
+    var HM_IN08_2D = getLocalStorageItemAndMultiply("HM_IN08_2");
+    var HM_IN08_3D = getLocalStorageItemAndMultiply("HM_IN08_3");
+    var HM_IN08_4D = getLocalStorageItemAndMultiply("HM_IN08_4");
+    var HM_IN08_5D = getLocalStorageItemAndMultiply("HM_IN08_5");
+    var HM_IN08_6D = getLocalStorageItemAndMultiply("HM_IN08_6");
+    var HM_IN09D = getLocalStorageItemAndMultiply("HM_IN09");
+    var HM_IN15D = getLocalStorageItemAndMultiply("HM_IN15");   
 
     document.getElementById('HM01N2').innerText = HM01N2;
     document.getElementById('HM01N3').innerText = HM01N3;
