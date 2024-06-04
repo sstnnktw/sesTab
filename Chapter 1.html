@@ -150,8 +150,8 @@
           <input id="HM01N1_T" class="etc" type="text" placeholder = "ระบุ">
           <br><br><span class="remark">บันทึกเป็นตัวแปร HM01N1_T</span>
       </div>
-      <br><br><span class="remark">ถ้า HM01N1 = 1 - 5 → เพศ(HM03) เปลี่ยนตามคำนำหน้าชื่อ (auto)</span>
-      <br><span class="remark">ถ้า HM01N1 = 6 → แสดงตัวเลือกของ HM03 ให้เลือก</span>
+      <br><br><span class="remark">- ถ้า HM01N1 = 1 - 5 → เพศ(HM03) เปลี่ยนตามคำนำหน้าชื่อ (auto)</span>
+      <br><span class="remark">- ถ้า HM01N1 = 6 → แสดงตัวเลือกของ HM03 ให้เลือก</span>
   </div> <!-- frame -->
   
 </div> <!-- HM01N1Div -->
@@ -240,8 +240,8 @@
           <option value="13">13 - ผู้อาศัย <b>รวม </b>คู่รักเพศเดียวกัน</option>
           <option value="00">00 - ลูกจ้างในธุรกิจของครัวเรือนและคนรับใช้</option>
       </select>
-      <br><br><span class="remark">ถ้า HM01 = 1 → HM02 = 1 (แก้ไขไม่ได้)</span>
-      <br><span class="remark">ถ้า HM01 != 1 → แสดงตัวเลือก 2-13, 00</span>
+      <br><br><span class="remark">- ถ้า HM01 = 1 → HM02 = 1 (แก้ไขไม่ได้)</span>
+      <br><span class="remark">- ถ้า HM01 != 1 → แสดงตัวเลือก 2-13, 00</span>
   </div> <!-- frame -->
   
 </div> <!-- HM01N1Div -->
@@ -262,8 +262,8 @@
           <option value="2">2 - หญิง</option>
       </select>
       
-      <br><br><span class="remark">ถ้า HM01_1N = 1 - 6 → เพศ(HM03) เปลี่ยนตามคำนำหน้าชื่อ (auto)</span>
-      <br><span class="remark">ถ้า HM01_1N = 6 → แสดงตัวเลือกของ HM03 ให้เลือก</span>
+      <br><br><span class="remark">- ถ้า HM01_1N = 1 - 6 → เพศ(HM03) เปลี่ยนตามคำนำหน้าชื่อ (auto)</span>
+      <br><span class="remark">- ถ้า HM01_1N = 6 → แสดงตัวเลือกของ HM03 ให้เลือก</span>
   </div>
   
 </div> <!-- HM03Div -->
@@ -491,6 +491,7 @@
       </select>
       <br><br><span class="remark">- ถามเฉพาะสมาชิกที่มีอายุต่ำกว่า 15 ปี</span>
       <br><span class="remark">- ถ้า HM11 = 1 ข้ามไปถาม HM14</span>
+      <br><span class="remark">- ถ้า HM11 = 2 - 5 ถามต่อ HM12 - HM13</span>
       <br><span class="remark">- ถ้าเลือกอื่น ๆ ให้ระบุเพิ่ม</span>
       
       <div id="HM11T" style="display: none;">
@@ -575,7 +576,9 @@
           <option value="2">2 - เรียนอยู่ในสถานศึกษารัฐบาล</option>
           <option value="3">3 - ไม่เรียนแล้ว</option>
       </select>
-      <br><br><span class="remark">ถ้า HM14 = 0 → ข้ามไปถาม HM22</span>
+      <br><br><span class="remark">- ถ้า HM14 = 0 → ข้ามไปถาม HM22</span>
+      <br><span class="remark">- ถ้า HM14 = 1 - 2 → ถาม HM15 - HM21</span>
+      <br><span class="remark">- ถ้า HM14 = 3 → ถาม HM15 - HM16, HM18 - HM21</span>
   </div>
   
 </div> <!-- HM14Div -->
@@ -621,8 +624,7 @@
   </div>
   
   <div class="frame">
-      <input id="HM15" type="text" style="color: #BFBFBF;" placeholder=" Search คำหรือรหัสได้">
-      <img src="https://icon-library.com/images/search-flat-icon/search-flat-icon-9.jpg" width="25" height="25" style="position: relative; left: 10px; top: 8px;">
+      <input id="HM15" type="text" style="color: #BFBFBF;">
   </div>
   
 </div> <!-- HM15Div -->
@@ -641,8 +643,7 @@
   </div>
   
   <div class="frame">
-      <input id="HM16" type="text" style="color: #BFBFBF;" placeholder=" Search คำหรือรหัสได้">
-      <img src="https://icon-library.com/images/search-flat-icon/search-flat-icon-9.jpg" width="25" height="25" style="position: relative; left: 10px; top: 8px;">
+      <input id="HM16" type="text" style="color: #BFBFBF;">
   </div>
   
 </div> <!-- HM16Div -->
@@ -656,8 +657,7 @@
   </div>
   
   <div class="frame">
-      <input id="HM17" type="text" style="color: #BFBFBF;" placeholder=" Search คำหรือรหัสได้">
-      <img src="https://icon-library.com/images/search-flat-icon/search-flat-icon-9.jpg" width="25" height="25" style="position: relative; left: 10px; top: 8px;">
+      <input id="HM17" type="text" style="color: #BFBFBF;">
       <br><br><span class="remark">ถามเฉพาะสมาชิกที่ HM14 = 1 หรือ 2</span>
   </div>
   
@@ -810,6 +810,7 @@
                           <option value="5">5 - ได้รับ 5 ปี</option>
                           <option value="8">8 - ได้รับผลประโยชน์ในรอบ 12 เดือนแต่ปัจจุบันไม่ได้รับแล้ว</option>
                       </select>
+                      <br><br><span class="remark">ถ้าได้รับ ให้ระบุจำนวนเงิน</span>
 
                       <div id="${component.in}Div" style="display: none;">
                           <br>จำนวนเงิน/มูลค่าที่ได้รับ :<br>
@@ -890,8 +891,6 @@
 
 <!-------------------------------------------- HM42 - HM44 : อาชีพหลัก -------------------------------------------->
 
-<div id="HM42-44Div">
-
   <div class="head0">
       <b>อาชีพหลัก</b>
   </div>
@@ -918,14 +917,11 @@
   <div class="frame">
       <input id="HM42" type="text" placeholder=" Search คำหรือรหัสได้">
       <img src="https://icon-library.com/images/search-flat-icon/search-flat-icon-9.jpg" width="25" height="25" style="position: relative; left: 10px; top: 8px;">
-      <br><br><span class="remark">If HM42 = 9991 → HM43 = 08 → <u>จบตอนที่ 1</u></span>
-      <br><span class="remark">If HM42 = 9992 → HM43 = 09 → <u>จบตอนที่ 1</u></span>
-      <br><span class="remark">If HM42 = 9993 → HM43 = 10 → <u>จบตอนที่ 1</u></span>
-      <br><span class="remark">If HM42 = 9994 → HM43 = 11 → <u>จบตอนที่ 1</u></span>
-      <br><span class="remark">If HM42 = 9995 → HM43 = 12 → <u>จบตอนที่ 1</u></span>
-      <br><span class="remark">If HM42 = 9999 → HM43 = 13 → <u>จบตอนที่ 1</u></span>
-      <br><span class="remark">If HM42 = 9996 → HM43 = 14 → <u>จบตอนที่ 1</u></span>
+      <br><br><span class="remark">- ถ้าไม่ได้ทำงาน → ข้ามไปถาม LST_MEM</span>
+      <br><span class="remark">- ถ้ามีรหัสอาชีพ → ข้ามต่อ HM43 - HM_IN2</span>
   </div> 
+  
+<div id="HM43-47Div" style="display: none;">
 
 <!-- HM43 : สถานภาพการทำงาน -->
   <div class="head">
@@ -972,12 +968,9 @@
       <input id="HM_IN1" type="number">
       	  <br><br><span class="remark">เก็บไว้แสดงค่าใน สศส.3 (ปล่อย blank ได้)</span>
   </div>
-  
-</div> <!-- HM42-44Div -->
 
 <!-------------------------------------------- HM45 - HM47 : อาชีพรอง -------------------------------------------->
 
-<div id="HM45-47Div">
   <div class="head0">
       <b>อาชีพรอง</b>
   </div>
@@ -995,7 +988,6 @@
   <div class="frame">
       <input id="HM45" type="text" placeholder=" Search คำหรือรหัสได้">
       <img src="https://icon-library.com/images/search-flat-icon/search-flat-icon-9.jpg" width="25" height="25" style="position: relative; left: 10px; top: 8px;">
-      <br><br><span class="remark">ไม่รวมรหัส 9991-9996, 9999</span>
   </div>
 
 <!-- HM46 : สถานภาพการทำงาน -->
@@ -1035,16 +1027,17 @@
       <input id="HM_IN2" type="number">
       	  <br><br><span class="remark">เก็บไว้แสดงค่าใน สศส.3 (ปล่อย blank ได้)</span>
   </div>
-</div> <!-- HM45-47Div -->
+  
+</div> <!-- HM43-47Div -->
 
-<!-- LST_MEN : เป็นสมาชิกคนสุดท้ายของครัวเรือนหรือไม่ -->
+<!-- LST_MEM : เป็นสมาชิกคนสุดท้ายของครัวเรือนหรือไม่ -->
   <div class="head">
       <span style="color: #ff0000;"><b>*</b></span>
-      <b>LST_MEN : เป็นสมาชิกคนสุดท้ายของครัวเรือนหรือไม่</b>
+      <b>LST_MEM : เป็นสมาชิกคนสุดท้ายของครัวเรือนหรือไม่</b>
   </div>
   
   <div class="frame">
-      <select id="LST_MEN">
+      <select id="LST_MEM">
           <option value="">-- กรุณาเลือก --</option>
           <option value="0">0 - ไม่เป็น</option>
           <option value="1">1 - เป็น</option>
@@ -1200,7 +1193,22 @@ function allF() {
     checkAndToggle('HM35', 'HM_IN15Div');
     checkAndToggle('HM36', 'HM_IN08_6Div');
     Others('HM41');
-    checkAndToggle('LST_MEN', 'HM01_1Div');
+    HM42();
+    checkAndToggle('LST_MEM', 'HM01_1Div');
+}
+
+<!--------------------------------------------------------------------->
+
+function HM42() {
+    var HM42Element = document.getElementById('HM42');
+    var HM42Value = HM42Element.value.trim();
+    var HM4347 = document.getElementById('HM43-47Div');
+
+    if (!(HM42Value === '' || (parseInt(HM42Value) >= 9991 && parseInt(HM42Value) <= 9996) || parseInt(HM42Value) === 9999)) { 
+        HM4347.style.display = 'block';
+    } else {
+        HM4347.style.display = 'none';
+    }
 }
     
 <!--------------------------------------------------------------------->
