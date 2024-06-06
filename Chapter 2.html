@@ -195,7 +195,7 @@
   </div>
   
   <div class="frame">
-      <select id="HH03">
+      <select id="HH03" onchange="updateHH04()">
           <option value="">-- กรุณาเลือก --</option>
           <option value="1">1 - เป็นเจ้าของบ้านและที่ดิน</option>
           <option value="2">2 - เป็นเจ้าของบ้านแต่เช่าที่ดิน</option>
@@ -218,6 +218,27 @@
   </div>
   
 </div> <!-- HH03Div -->
+
+<!----------------------------->
+
+<script>
+    function updateHH04() {
+        const HH03 = document.getElementById('HH03').value;
+        const HH04 = document.getElementById('HH04');
+
+		if (HH03 != '5') {
+        	HH04.disabled = false;
+        } else {
+            if (HH03 === '5') {
+                HH04.value = '1';
+                HH04.disabled = true;
+            } else {
+                HH04.value = '';
+                HH04.disabled = false;
+            }
+        }
+    }
+</script>
 
 <!--------------------------------------------- HH04 : ผู้จ่ายค่าเช่า/ผู้ให้สวัสดิการ/ให้อยู่ฟรี --------------------------------------------->
 
@@ -869,63 +890,44 @@ function next() {
 
 <!-- อื่น ๆ ระบุ... -->
 
-    function Others(fieldId) {
-        var field = document.getElementById(fieldId);
-        var others = document.getElementById(fieldId + "T");
-        
-        switch (fieldId) {
-            case "HH01":
-            case "HH04":
-                if (field.value === "7") {
-                    others.style.display = "block";
-                    others.value = "";
-                } else {
-                    others.style.display = "none";
-                }
-                break;
-            case "HH02":
-                if (field.value === "6") {
-                    others.style.display = "block";
-                    others.value = "";
-                } else {
-                    others.style.display = "none";
-                }
-                break;
-            case "HH03":
-            case "HH11":
-            case "HH12":
-            case "HH13":
-            case "HH14":
-                if (field.value === "8") {
-                    others.style.display = "block";
-                    others.value = "";
-                } else {
-                    others.style.display = "none";
-                }
-                break;
-            case "HM13":
-            case "HH10":
-                if (field.value === "6") {
-                    others.style.display = "block";
-                    others.value = "";
-                } else {
-                    others.style.display = "none";
-                }
-                break;
-            default:
-                others.style.display = "none";
-                break;
-        }
+function Others(fieldId) {
+    var field = document.getElementById(fieldId);
+    var others = document.getElementById(fieldId + "T");
+    var shouldShowOthers = {
+    	"HH01": "7",
+    	"HH04": "7",
+    	"HH02": "6",
+    	"HH03": "8",
+    	"HH10": "6",
+    	"HH11": "8",
+    	"HH12": "8",
+    	"HH13": "8",
+    	"HH14": "8"
+    };
 
-        if (fieldId === "HH03") {
-            var HH04Div = document.getElementById('HH04Div');
-            if ([1, 2, 3, 4].includes(parseInt(field.value))) {
+    if (shouldShowOthers[fieldId] && field.value === shouldShowOthers[fieldId]) {
+    	others.style.display = "block";
+    } else {
+    	others.style.display = "none";
+    	if (others) {
+    		var textInput = others.querySelector('input[type="text"]');
+    		if (textInput) {
+    			textInput.value = ""; // Clear the textbox value
+    		}
+    	}
+    }
+
+    if (fieldId === "HH03") {
+    	var HH04Div = document.getElementById('HH04Div');
+    	if ([1, 2, 3, 4].includes(parseInt(field.value))) {
                 HH04Div.style.display = "none";
             } else {
                 HH04Div.style.display = "block";
             }
-        }
     }
+    
+    localStorage.setItem(fieldId, field.value); // Save the selectBox value
+}
 
 <!--------------------------------------------------------------------->
 
@@ -962,6 +964,7 @@ function checkDisability(input) {
 <!--------------------------------------------------------------------->
     
 function allF() {
+	updateHH04();
     Others('HH01');
     Others('HH02');
     checkDisability('HH03');
@@ -981,7 +984,8 @@ function allF() {
     var inputIds = Array.from(elements).map(function(element) {
         return element.id;
     });
-<!--------------------------------------------------------------------->
+    
+<!-------------------------------->
 
 function saveToLocalStorage() {
     inputIds.forEach(function(id) {
@@ -989,7 +993,7 @@ function saveToLocalStorage() {
     });
 }
 
-<!--------------------------------------------------------------------->
+<!-------------------------------->
 
 function resetLocalStorage() {
     localStorage.clear();
@@ -998,7 +1002,7 @@ function resetLocalStorage() {
     window.onload();
 }
 
-<!--------------------------------------------------------------------->
+<!-------------------------------->
 
 window.onload = function() {
     inputIds.forEach(function(id) {
