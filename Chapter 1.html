@@ -135,7 +135,7 @@
   </div>
   
   <div class="frame">
-      <select id="HM01N1" onchange="updateGender()">
+      <select id="HM01N1">
           <option value="">-- กรุณาเลือก --</option>
           <option value="1">1 - นาย</option>
           <option value="2">2 - นาง</option>
@@ -163,15 +163,19 @@
         const title = document.getElementById('HM01N1').value;
         const genderSelect = document.getElementById('HM03');
 
-        if (title === '1' || title === '4') {
-            genderSelect.value = '1';
-            genderSelect.disabled = true;
-        } else if (title === '2' || title === '3' || title === '5') {
-            genderSelect.value = '2';
-            genderSelect.disabled = true;
+		if (title === '6') {
+        	genderSelect.disabled = false;
         } else {
-            genderSelect.value = '';
-            genderSelect.disabled = false;
+            if (title === '1' || title === '4') {
+                genderSelect.value = '1';
+                genderSelect.disabled = true;
+            } else if (title === '2' || title === '3' || title === '5') {
+                genderSelect.value = '2';
+                genderSelect.disabled = true;
+            } else {
+                genderSelect.value = '';
+                genderSelect.disabled = false;
+            }
         }
     }
 </script>
@@ -1187,6 +1191,7 @@ function HM42() {
 <!--------------------------------------------------------------------->
     
 function allF() {
+	updateGender();
     Others('HM01N1');
     checkAge('HM04');
     Others('HM05');
