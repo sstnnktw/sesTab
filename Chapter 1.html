@@ -135,7 +135,7 @@
   </div>
   
   <div class="frame">
-      <select id="HM01N1">
+      <select id="HM01N1" onchange="updateGender()">
           <option value="">-- กรุณาเลือก --</option>
           <option value="1">1 - นาย</option>
           <option value="2">2 - นาง</option>
@@ -160,26 +160,19 @@
 
 <script>
     function updateGender() {
-        var titleSelect = document.getElementById('HM01N1');
-        var genderSelect = document.getElementById('HM03');
+        const title = document.getElementById('HM01N1').value;
+        const genderSelect = document.getElementById('HM03');
+        const otherTitleDiv = document.getElementById('HM01N1T');
 
-        var selectedTitle = titleSelect.value;
-
-        if (["1", "4"].includes(selectedTitle)) {
-            genderSelect.innerHTML = '<option value="1" selected>1 - ชาย</option>';
-            genderSelect.style.backgroundColor = '#EEEEEE';
-            genderSelect.style.color = '#BFBFBF';
-            genderSelect.readOnly  = true;
-        } else if (["2", "3", "5"].includes(selectedTitle)) {
-            genderSelect.innerHTML = '<option value="2" selected>2 - หญิง</option>';
-            genderSelect.style.backgroundColor = '#EEEEEE';
-            genderSelect.style.color = '#BFBFBF';
-            genderSelect.readOnly  = true;
+        if (title === '1' || title === '4') {
+            genderSelect.value = '1';
+            genderSelect.disabled = true;
+        } else if (title === '2' || title === '3' || title === '5') {
+            genderSelect.value = '2';
+            genderSelect.disabled = true;
         } else {
-            genderSelect.innerHTML = '<option value="">-- กรุณาเลือก --</option><option value="1">1 - ชาย</option><option value="2">2 - หญิง</option>';
-            genderSelect.style.backgroundColor = '';
-            genderSelect.style.color = '';
-            genderSelect.readOnly  = false;
+            genderSelect.value = '';
+            genderSelect.disabled = false;
         }
     }
 </script>
@@ -1109,33 +1102,40 @@ function Others(fieldId) {
     var field = document.getElementById(fieldId);
     var others = document.getElementById(fieldId + "T");
     var shouldShowOthers = {
-        "HM01N1": "6",
-        "HM05": "4",
-        "HM06": "7",
-        "HM11": "5",
-        "HM13": "6",
-        "HM28": "1",
-        "HM41": "1"
+    	"HM01N1": "6",
+    	"HM05": "4",
+    	"HM06": "7",
+    	"HM11": "5",
+    	"HM13": "6",
+    	"HM28": "1",
+    	"HM41": "1"
     };
 
     if (shouldShowOthers[fieldId] && field.value === shouldShowOthers[fieldId]) {
-        others.style.display = "block";
-        others.value = "";
+    	others.style.display = "block";
     } else {
-        others.style.display = "none";
+    	others.style.display = "none";
+    	if (others) {
+    		var textInput = others.querySelector('input[type="text"]');
+    		if (textInput) {
+    			textInput.value = ""; // Clear the textbox value
+    		}
+    	}
     }
 
     if (fieldId === "HM11") {
-        var HM12Div = document.getElementById('HM12Div');
-        var HM13Div = document.getElementById('HM13Div');
-        if (field.value === "1"|| field.value === "") {
-            HM12Div.style.display = "none";
-            HM13Div.style.display = "none";
-        } else {
-            HM12Div.style.display = "block";
-            HM13Div.style.display = "block";
-        }
+    	var HM12Div = document.getElementById('HM12Div');
+    	var HM13Div = document.getElementById('HM13Div');
+    	if (field.value === "1" || field.value === "") {
+    		HM12Div.style.display = "none";
+    		HM13Div.style.display = "none";
+    	} else {
+    		HM12Div.style.display = "block";
+    		HM13Div.style.display = "block";
+    	}
     }
+    
+    localStorage.setItem(fieldId, field.value); // Save the selectBox value
 }
 
 <!--------------------------------------------------------------------->
@@ -1170,11 +1170,24 @@ function checkDisability(input) {
             selectElement.value = "";
         }
 }
+
+<!--------------------------------------------------------------------->
+
+function HM42() {
+    var HM42Element = document.getElementById('HM42');
+    var HM42Value = HM42Element.value.trim();
+    var HM4347 = document.getElementById('HM43-47Div');
+
+    if (!(HM42Value === '' || (parseInt(HM42Value) >= 9991 && parseInt(HM42Value) <= 9996) || parseInt(HM42Value) === 9999)) { 
+        HM4347.style.display = 'block';
+    } else {
+        HM4347.style.display = 'none';
+    }
+}
     
 <!--------------------------------------------------------------------->
     
 function allF() {
-    updateGender();
     Others('HM01N1');
     checkAge('HM04');
     Others('HM05');
@@ -1196,20 +1209,6 @@ function allF() {
     HM42();
     checkAndToggle('LST_MEM', 'HM01_1Div');
 }
-
-<!--------------------------------------------------------------------->
-
-function HM42() {
-    var HM42Element = document.getElementById('HM42');
-    var HM42Value = HM42Element.value.trim();
-    var HM4347 = document.getElementById('HM43-47Div');
-
-    if (!(HM42Value === '' || (parseInt(HM42Value) >= 9991 && parseInt(HM42Value) <= 9996) || parseInt(HM42Value) === 9999)) { 
-        HM4347.style.display = 'block';
-    } else {
-        HM4347.style.display = 'none';
-    }
-}
     
 <!--------------------------------------------------------------------->
 
@@ -1218,7 +1217,7 @@ function HM42() {
         return element.id;
     });
     
-<!--------------------------------------------------------------------->
+<!-------------------------------->
 
 function saveToLocalStorage() {
     inputIds.forEach(function(id) {
@@ -1226,7 +1225,7 @@ function saveToLocalStorage() {
     });
 }
 
-<!--------------------------------------------------------------------->
+<!-------------------------------->
 
 function resetLocalStorage() {
     localStorage.clear();
@@ -1235,7 +1234,7 @@ function resetLocalStorage() {
     window.onload();
 }
 
-<!--------------------------------------------------------------------->
+<!-------------------------------->
 
 window.onload = function() {
     inputIds.forEach(function(id) {
