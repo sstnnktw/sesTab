@@ -678,7 +678,7 @@
                 <td id="total">
                 	<input type="number"
                     	   class="total"
-                           id="CONA"
+                           id="CON_A"
                            placeholder="CON_A"
                     >
                 </td>
@@ -686,7 +686,7 @@
                 <td id="total">
                 	<input type="number"
                     	   class="total"
-                           id="CONBC"
+                           id="CON_BC"
                            placeholder="CON_BC"
                     >
                 </td>
@@ -759,7 +759,7 @@ function allMonthly() {
 
 <!-------------------------------------------------------------------------->
 
-var CON = CONA + CONBC;
+var CON = CON_A + CON_BC;
 
 function updateSum() {
     var sum = 0;
@@ -780,7 +780,7 @@ function updateSum() {
 function calculateTotal(inputId) {
     saveToLocalStorage();
     var sum = 0;
-    var prefix = inputId === 'CONA' ? 'A' : 'BC';
+    var prefix = inputId === 'CON_A' ? 'A' : 'BC';
     var keys = [];
     if (prefix === 'A') {
         for (var i = 1; i <= 111; i++) {
@@ -856,8 +856,8 @@ window.onload = function() {
         var inputField = document.getElementById(id);
         inputField.addEventListener('input', function() {
         	saveToLocalStorage();
-            calculateTotal('CONA');
-            calculateTotal('CONBC');
+            calculateTotal('CON_A');
+            calculateTotal('CON_BC');
         	allMonthly();
         	allSum();
         });
@@ -870,8 +870,8 @@ window.onload = function() {
         }
     });
     saveToLocalStorage();
-    calculateTotal('CONA');
-    calculateTotal('CONBC');
+    calculateTotal('CON_A');
+    calculateTotal('CON_BC');
     allMonthly();
     allSum();
 };
