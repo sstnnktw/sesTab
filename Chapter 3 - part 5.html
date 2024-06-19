@@ -493,7 +493,7 @@
                 <td id="total">
                 	<input type="number"
                     	   class="total"
-                           id="NCONA"
+                           id="NCON_A"
                            placeholder="NCON_A"
                     >
                 </td>
@@ -501,7 +501,7 @@
                 <td id="total">
                 	<input type="number"
                     	   class="total"
-                           id="NCONBC"
+                           id="NCON_BC"
                            placeholder="NCON_BC"
                     >
                 </td>
@@ -590,9 +590,9 @@ function allSum() {
     updateSum('EG117_1BC','EG117_2BC','EG117_3BC', 'EG117BC');
     
     updateSum('EG112A', 'EG113A', 'EG114A', 'EG115A', 'EG116A',
-    		  'EG117A', 'EG118A', 'EG119A', 'EG120A', 'NCONA');
+    		  'EG117A', 'EG118A', 'EG119A', 'EG120A', 'NCON_A');
     updateSum('EG112BC', 'EG113BC', 'EG114BC', 'EG115BC', 'EG116BC',
-    		  'EG117BC', 'EG118BC', 'EG119BC', 'EG120BC', 'NCONBC');
+    		  'EG117BC', 'EG118BC', 'EG119BC', 'EG120BC', 'NCON_BC');
 }
 
 <!-------------------------------------------------------------------------->
@@ -600,7 +600,7 @@ function allSum() {
 function calculateTotal(inputId) {
     var sum = 0;
     for (var i = 112; i <= 120; i++) {
-        var key = "EG" + i.toString().padStart(2, '0') + (inputId === 'NCONA' ? 'A' : 'BC');
+        var key = "EG" + i.toString().padStart(2, '0') + (inputId === 'NCON_A' ? 'A' : 'BC');
         var value = parseFloat(localStorage.getItem(key)) || 0;
         sum += value;
     }
