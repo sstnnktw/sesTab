@@ -257,7 +257,7 @@
 <div id="AE00Div">
   <div class="head1">
   	  <span style="color: #ff0000;"><b>*</b></span>
-      <b>1.</b> (ปัจจุบัน) <b>ครัวเรือนของท่านมีหนี้สินหรือไม่</b>
+      <b>AE00 : ครัวเรือนของท่านมีหนี้สินหรือไม่</b>
   </div>
   
   <div class="select">
@@ -276,7 +276,7 @@
 <div id="AE01Div">
   <div class="head1">
   	  <span style="color: #ff0000;"><b>*</b></span>
-      <b>2.</b> (ในรอบ 12 เดือนที่แล้ว) <b>ครัวเรือนของท่านมีการชำระหนี้สินทุกประเภท</b> (<b>รวม ผ่อนบ้านและ/หรือที่ดิน) หรือไม่</b>
+      <b>AE01 : ครัวเรือนของท่านมีการชำระหนี้สินทุกประเภท</b> (<b>รวม ผ่อนบ้านและ/หรือที่ดิน) หรือไม่</b>
   </div>
   
   <div class="select">
@@ -551,7 +551,7 @@
 <div id="AE01Div">
   <div class="head1">
   	  <span style="color: #ff0000;"><b>*</b></span>
-      <b>1.</b> (ในรอบ 12 เดือนที่แล้ว) <b>ครัวเรือนนี้มีการซื้อที่อยู่อาศัย (ด้วยเงินออมของครัวเรือน) หรือไม่</b>
+      <b>AE08 : ครัวเรือนนี้มีการซื้อที่อยู่อาศัย (ด้วยเงินออมของครัวเรือน) หรือไม่</b>
   </div>
   
   <div class="select" style="padding-bottom: 0px;">
@@ -563,7 +563,6 @@
       
       <span class="remark">AE08</span><br><br>
       <span class="remark">- ซ่อน AE09 ไว้ และแสดงเมื่อ AE08 = 1</span><br>
-      <span class="remark">- if AE08 = 0 → AE09 = 0</span>
   </div>
 </div><!-- AE08Div -->
 
@@ -657,12 +656,24 @@ function toggleDiv(divId, selectId) {
         div.style.display = "none";
     }
 }
+	
+<!-------------------------------------------------------------------------->
+
+function toggleAE09() {
+    const ae08Value = document.getElementById('AE08').value;
+
+    if (ae08Value === '0' || ae08Value === '') {
+        document.getElementById('AE09Y').value = '';
+        document.getElementById('AE09').value = '';
+    }
+}
 
 <!-------------------------------------------------------------------------->
 
 function allF() {
     toggleDiv('AE0207Div', 'AE01');
     toggleDiv('AE09Div', 'AE08');
+    toggleAE09();
     
     CalMonthly('AE02AY', 'AE02A');
     CalMonthly('AE03AY', 'AE03A');
