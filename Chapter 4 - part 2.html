@@ -1355,8 +1355,8 @@ function calculateValues() {
 
         if (SA || SBC) {
             const base = (PM * 4.3) + PW + (PD / 7);
-            const A_result = CA / base;
-            const B_result = CBC / base;
+            const A_result = Math.round(CA / base);
+            const B_result = Math.round(CBC / base);
 
             if (!isNaN(A_result)) {
                 A.value = Math.round(A_result);
